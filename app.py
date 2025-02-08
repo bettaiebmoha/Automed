@@ -5,33 +5,39 @@ import os
 
 app = Flask(__name__)
 
-# Chemin du modèle
-# Chemin relatif du modèle
-MODEL_PATH = os.path.join(os.getcwd(), "models", "modele_voiture.pkl")
+# Chemin absolu vers le modèle
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "modele_voiture.pkl")
 
 # Charger le modèle
-model_pipeline = None  # Initialise une variable globale pour le modèle
+model_pipeline = None
 
 def load_model():
     global model_pipeline
     try:
+        print(f"📂 Vérification du fichier modèle : {MODEL_PATH}")
         if not os.path.exists(MODEL_PATH):
-            raise FileNotFoundError(f"Le fichier {MODEL_PATH} n'existe pas.")
+            raise FileNotFoundError(f"❌ Le fichier modèle {MODEL_PATH} est introuvable.")
         
         with open(MODEL_PATH, "rb") as file:
             model_pipeline = pickle.load(file)
-        print("✅ Modèle chargé avec succès.")
+
+        # Vérifier que le modèle est bien un pipeline ou un modèle entraîné
+        if not hasattr(model_pipeline, "predict"):
+            raise TypeError("❌ Le fichier chargé n'est pas un modèle valide (aucune méthode 'predict' détectée).")
+
+        print(f"✅ Modèle chargé avec succès : {type(model_pipeline)}")
+
     except Exception as e:
         print(f"❌ Erreur lors du chargement du modèle : {e}")
         model_pipeline = None
 
-
-# Charger le modèle au démarrage de l'application
+# Charger le modèle au démarrage
 load_model()
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    car_models = sorted(set([
+    car_models = [
         "Peugeot 208", "Citroen C3", "Kia Sportage SX", "Volkswagon Golf 8 GTE", "Mercedes Benz CLA",
         "Peugeot Partner", "Skoda Kamiq", "BMW Série 5", "Mercedes Benz GLC", "Nissan Juke",
         "Renault Kwid Populaire", "BMW X1", "Mercedes Benz Classe S350", "Jaguar F Pace", "Jaguar XF",
@@ -44,7 +50,7 @@ def home():
         "Skoda Fabia", "Ford Ecosport", "Hyundai Creta", "Mazda 2", "Toyota Land Cruiser", "Nissan Qashqai",
         "Audi A5 Sportback", "Seat Ibiza", "Nissan Patrol", "Peugeot 308", "Volkswagon Polo", "Toyota RAV4",
         "Range Rover Sport", "Mini Cooper", "Peugeot 508", "Mercedes Benz GLA", "BMW Série X4", "Hyundai i20"
-    ]))
+    ]
 
     if request.method == "POST":
         try:
@@ -86,4 +92,3 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
