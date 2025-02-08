@@ -32,11 +32,20 @@ load_model()
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    car_models = sorted([
-        "Peugeot 208", "Citroen C3", "Kia Sportage SX", "Volkswagon Golf 8 GTE",
-        "Mercedes Benz CLA", "Peugeot Partner", "Skoda Kamiq", "BMW Série 5"
-    ])  # Liste réduite pour l'exemple
-
+ car_models = sorted(set([
+        "Peugeot 208", "Citroen C3", "Kia Sportage SX", "Volkswagon Golf 8 GTE", "Mercedes Benz CLA",
+        "Peugeot Partner", "Skoda Kamiq", "BMW Série 5", "Mercedes Benz GLC", "Nissan Juke",
+        "Renault Kwid Populaire", "BMW X1", "Mercedes Benz Classe S350", "Jaguar F Pace", "Jaguar XF",
+        "Mercedes Benz Classe C", "Mercedes Benz Classe E Coupé", "Range Rover Evoque", "Jeep Compass",
+        "Cupra Formentor Exclusive", "Porche Cayenne", "BMW Série 4 Grand Coupé", "DS 3 Chic",
+        "BMW Série 1", "Golf 7 Join", "Kia Rio SX", "Seat Arona", "Toyota Hilux Double Cabine",
+        "Audi A3 Sportback", "Volkswagon Golf 7", "Chery Tiggo 8 Pro", "Volkswagon Passat", "Renault Clio Campus",
+        "BMW Série 3", "BMW X5", "BMW Série 7", "Volkswagon Tiguan", "Hyundai Tucson", "Mini 5 Porte", 
+        "Fiat 500", "Renault Symbol", "Hyundai Grand i10", "Ssangyong Tivoli", "Haval H6", "Mitsubishi Pajero",
+        "Skoda Fabia", "Ford Ecosport", "Hyundai Creta", "Mazda 2", "Toyota Land Cruiser", "Nissan Qashqai",
+        "Audi A5 Sportback", "Seat Ibiza", "Nissan Patrol", "Peugeot 308", "Volkswagon Polo", "Toyota RAV4",
+        "Range Rover Sport", "Mini Cooper", "Peugeot 508", "Mercedes Benz GLA", "BMW Série X4", "Hyundai i20"
+    ]))
     if request.method == "POST":
         try:
             if model_pipeline is None:
