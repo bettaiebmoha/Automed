@@ -25,11 +25,12 @@ def load_model():
     global model_pipeline
     try:
         # Charger le modèle entraîné (par exemple, un pipeline scikit-learn)
-        with open(r"C:\Users\betta\Downloads\modele_voiture.pkl", "rb") as file:
+        with open(r"C:\Users\betta\Automed\models\modele_voiture.pkl", "rb") as file:
             model_pipeline = pickle.load(file)
         print("✅ Modèle chargé avec succès.")
     except Exception as e:
         print(f"❌ Erreur lors du chargement du modèle : {e}")
+        model_pipeline = None
 
 # Charger le modèle au démarrage de l'application
 load_model()
