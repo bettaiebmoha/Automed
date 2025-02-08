@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # 📌 Définition du chemin du modèle
-MODEL_PATH =r"models/modele_voiture.pkl"
+MODEL_PATH = r"models/modele_voiture.pkl"
 
 # 📌 Vérifier si le fichier existe avant de charger
 if not os.path.exists(MODEL_PATH):
@@ -32,7 +32,8 @@ load_model()
 
 @app.route("/", methods=["GET", "POST"])
 def home():
- car_models = sorted(set([
+    # 📌 Liste des modèles de voitures
+    car_models = sorted(set([
         "Peugeot 208", "Citroen C3", "Kia Sportage SX", "Volkswagon Golf 8 GTE", "Mercedes Benz CLA",
         "Peugeot Partner", "Skoda Kamiq", "BMW Série 5", "Mercedes Benz GLC", "Nissan Juke",
         "Renault Kwid Populaire", "BMW X1", "Mercedes Benz Classe S350", "Jaguar F Pace", "Jaguar XF",
@@ -46,6 +47,8 @@ def home():
         "Audi A5 Sportback", "Seat Ibiza", "Nissan Patrol", "Peugeot 308", "Volkswagon Polo", "Toyota RAV4",
         "Range Rover Sport", "Mini Cooper", "Peugeot 508", "Mercedes Benz GLA", "BMW Série X4", "Hyundai i20"
     ]))
+
+    # Traitement de la requête POST
     if request.method == "POST":
         try:
             if model_pipeline is None:
@@ -63,7 +66,7 @@ def home():
             if not all([model, mileage, year, gearbox, fiscal_power, fuel]):
                 raise ValueError("Tous les champs doivent être remplis.")
 
-            # 🔹 Convertir les valeurs
+            # 🔹 Convertir les valeurs en entiers si nécessaire
             mileage = int(mileage)
             year = int(year)
             fiscal_power = int(fiscal_power)
@@ -83,6 +86,7 @@ def home():
             print(f"❌ Erreur lors de la prédiction : {e}")
             return render_template("index.html", error=f"Erreur: {e}", models=car_models)
 
+    # Afficher la page d'accueil avec la liste des modèles
     return render_template("index.html", models=car_models)
 
 if __name__ == "__main__":
