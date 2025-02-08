@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # 📌 Définition du chemin du modèle
-MODEL_PATH = r"models/modele_voiture.pkl"
+MODEL_PATH =r"models/modele_voiture.pkl"
 
 # 📌 Vérifier si le fichier existe avant de charger
 if not os.path.exists(MODEL_PATH):
