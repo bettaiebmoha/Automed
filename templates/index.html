@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimation du prix - Automed</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/automed.png') }}" alt="Logo Automed" class="logo">
+            <h1>Estimation du prix de votre véhicule</h1>
+        </div>
+
+        <form method="POST">
+            <label for="model">Modèle :</label>
+            <select name="model" required>
+                <option value="" disabled selected>-- Sélectionnez un modèle --</option>
+                {% for model in models %}
+                    <option value="{{ model }}">{{ model }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="mileage">Kilométrage (km) :</label>
+            <input type="number" name="mileage" required>
+
+            <label for="year">Année :</label>
+            <input type="number" name="year" required>
+
+            <label for="gearbox">Boîte de vitesses :</label>
+            <select name="gearbox" required>
+                <option value="Manuelle">Manuelle</option>
+                <option value="Automatique">Automatique</option>
+            </select>
+
+            <label for="fiscal_power">Puissance fiscale :</label>
+            <input type="number" name="fiscal_power" required>
+
+            <label for="fuel">Carburant :</label>
+            <select name="fuel" required>
+                <option value="Essence">Essence</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Hybride">Hybride</option>
+            </select>
+
+            <button type="submit">Estimer le prix</button>
+        </form>
+
+        {% if prediction %}
+        <p class="prediction"><strong>{{ prediction }}</strong></p>
+        {% elif error %}
+        <p class="error"><strong>{{ error }}</strong></p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
