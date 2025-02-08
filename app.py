@@ -6,7 +6,8 @@ import os
 app = Flask(__name__)
 
 # Chemin du modèle
-MODEL_PATH = r"C:\Users\betta\Automed\models\modele_voiture.pkl"  # Remplace ce chemin par ton vrai chemin
+# Chemin relatif du modèle
+MODEL_PATH = os.path.join(os.getcwd(), "models", "modele_voiture.pkl")
 
 # Charger le modèle
 model_pipeline = None  # Initialise une variable globale pour le modèle
