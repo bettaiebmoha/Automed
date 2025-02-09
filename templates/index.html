@@ -47,7 +47,12 @@
             </select>
 
             <label for="fiscal_power">Puissance fiscale :</label>
-            <input type="number" name="fiscal_power" required>
+            <select name="fiscal_power" required>
+                <option value="" disabled selected>-- Sélectionnez la puissance fiscale --</option>
+                {% for power in range(3, 49) %}
+                    <option value="{{ power }}">{{ power }} CV</option>
+                {% endfor %}
+            </select>
 
             <label for="fuel">Carburant :</label>
             <select name="fuel" required>
