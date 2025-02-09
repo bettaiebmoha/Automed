@@ -28,12 +28,17 @@
             <select name="mileage" required>
                 <option value="" disabled selected>-- Sélectionnez le kilométrage --</option>
                 {% for km in range(0, 350001, 20000) %}
-                    <option value="{{ km }}">{{ km }} km</option>
+                    <option value="{{ km }}">{{ km }} - {{ km+20000 }} km</option>
                 {% endfor %}
             </select>
 
             <label for="year">Année :</label>
-            <input type="number" name="year" required>
+            <select name="year" required>
+                <option value="" disabled selected>-- Sélectionnez l'année --</option>
+                {% for year in range(2000, 2026) %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
 
             <label for="gearbox">Boîte de vitesses :</label>
             <select name="gearbox" required>
@@ -42,7 +47,12 @@
             </select>
 
             <label for="fiscal_power">Puissance fiscale :</label>
-            <input type="number" name="fiscal_power" required>
+            <select name="fiscal_power" required>
+                <option value="" disabled selected>-- Sélectionnez la puissance fiscale --</option>
+                {% for power in range(3, 49) %}
+                    <option value="{{ power }}">{{ power }} CV</option>
+                {% endfor %}
+            </select>
 
             <label for="fuel">Carburant :</label>
             <select name="fuel" required>
@@ -60,6 +70,15 @@
         <p class="error"><strong>{{ error }}</strong></p>
         {% endif %}
     </div>
+
+    <!-- Section Contact Us -->
+    <footer>
+        <h2>Contact Us</h2>
+        <div class="social-links">
+            <a href="https://www.facebook.com/mohamed.bettaieb.568/about" class="facebook" target="_blank">Facebook</a>
+            <a href="https://www.linkedin.com/in/bettaieb-mohamed-ba0690199" class="linkedin" target="_blank">LinkedIn</a>
+        </div>
+    </footer>
 </body>
 
 </html>
