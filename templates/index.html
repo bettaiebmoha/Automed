@@ -25,10 +25,20 @@
             </select>
 
             <label for="mileage">Kilométrage (km) :</label>
-            <input type="number" name="mileage" required>
+            <select name="mileage" required>
+                <option value="" disabled selected>-- Sélectionnez le kilométrage --</option>
+                {% for km in range(0, 350001, 20000) %}
+                    <option value="{{ km }}">{{ km }} km</option>
+                {% endfor %}
+            </select>
 
             <label for="year">Année :</label>
-            <input type="number" name="year" required>
+            <select name="year" required>
+                <option value="" disabled selected>-- Sélectionnez l'année --</option>
+                {% for year in range(2000, 2025) %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
 
             <label for="gearbox">Boîte de vitesses :</label>
             <select name="gearbox" required>
