@@ -33,12 +33,7 @@
             </select>
 
             <label for="year">Année :</label>
-            <select name="year" required>
-                <option value="" disabled selected>-- Sélectionnez l'année --</option>
-                {% for year in range(2000, 2025) %}
-                    <option value="{{ year }}">{{ year }}</option>
-                {% endfor %}
-            </select>
+            <input type="number" name="year" required>
 
             <label for="gearbox">Boîte de vitesses :</label>
             <select name="gearbox" required>
@@ -47,12 +42,7 @@
             </select>
 
             <label for="fiscal_power">Puissance fiscale :</label>
-            <select name="fiscal_power" required>
-                <option value="" disabled selected>-- Sélectionnez la puissance fiscale --</option>
-                {% for power in range(3, 49) %}
-                    <option value="{{ power }}">{{ power }} CV</option>
-                {% endfor %}
-            </select>
+            <input type="number" name="fiscal_power" required>
 
             <label for="fuel">Carburant :</label>
             <select name="fuel" required>
@@ -70,15 +60,6 @@
         <p class="error"><strong>{{ error }}</strong></p>
         {% endif %}
     </div>
-
-    <!-- Section Contact Us -->
-    <footer>
-        <h2>Contact Us</h2>
-        <div class="social-links">
-            <a href="https://www.facebook.com/mohamed.bettaieb.568/about" class="facebook" target="_blank">Facebook</a>
-            <a href="https://www.linkedin.com/in/bettaieb-mohamed-ba0690199" class="linkedin" target="_blank">LinkedIn</a>
-        </div>
-    </footer>
 </body>
 
 </html>
